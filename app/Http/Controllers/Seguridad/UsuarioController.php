@@ -6,8 +6,7 @@ namespace App\Http\Controllers\Seguridad;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Seguridad\Usuario;  
-
-
+use Carbon\carbon;
 
 class UsuarioController extends Controller
 {
@@ -22,11 +21,7 @@ class UsuarioController extends Controller
     }
 
 
-     /**
-     * Muestra la vista de detalle para un solo usuario.
-     *
-     * @param  int  $idUsuario
-     */
+  
     public function detalle(int $idUsuario)
     {
         // findOrFail lanza 404 si no existe

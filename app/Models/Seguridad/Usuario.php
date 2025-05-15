@@ -4,7 +4,7 @@ namespace App\Models\Seguridad;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
-
+use Carbon\carbon;
 class Usuario extends Model
 {
 
@@ -17,8 +17,7 @@ class Usuario extends Model
     {
         $row = Usuario::find($id);
         if ($row) {
-            $fecha = date("Y-m-d H:i:s");
-            $row->usuarioUltimaConexion = $fecha;
+             $row->usuarioUltimaConexion = Carbon::now();
             $row->save();
             return TRUE;
         } else {

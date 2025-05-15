@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Seguridad\LoginController;
 use App\Http\Controllers\Seguridad\UsuarioController;
+use App\Http\Middleware\CheckSession;
 
 Route::get('/', function () {
     return redirect('/seguridad/auth/login');
@@ -10,7 +11,7 @@ Route::get('/', function () {
 
 /**SEGURIDAD */
 Route::prefix('seguridad')->group(function () {
-    Route::prefix('auth')->group(function () {
+    Route::prefix('auth')->middleware('guest.session')->group(function () {
         Route::get('/login', [LoginController::class, 'login'])->name('login');
 
         Route::post('/acceso', [
@@ -34,10 +35,23 @@ Route::prefix('seguridad')->group(function () {
            ->name('password.reset.form');
       Route::post('/reset-password', [LoginController::class, 'resetPassword'])
            ->name('password.update');
+
+
+           Route::get('/test', [LoginController::class, 'testapp'])
+           ->name('testapp');
     });
     
+
+
+    // Cerrar sesion
+    Route::post('/logout', [LoginController::class, 'logout'])
+    ->middleware('check.session')
+    ->name('logout');
+
+
+    
     /**USUARIO */
-    Route::prefix('usuario')->group(function () {
+    Route::prefix('usuario')->middleware('check.session')->group(function () {
         Route::get('/catalogo', [
             UsuarioController::class,
             'catalogo'

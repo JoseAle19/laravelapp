@@ -83,7 +83,11 @@ class LoginController extends Controller
 
                 if ($bandera) {
                     $modeloUsuario->guardarSesion($usuario->idUsuario);
-                  
+                    
+         $request->session()->regenerate();
+
+        $request->session()->put('user_id', $usuario->idUsuario);
+
                     return response()->json(['success' => true, 'message' => 'Excelente logueo con éxito.', 'url' => $url]);
                 } else {
                     return response()->json(['success' => false, 'required' => true, 'message' => ['usuarioAlias' => [$mensajes]]]);
@@ -92,12 +96,14 @@ class LoginController extends Controller
         }
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        session()->flush();
-        return redirect('/');
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect()->route('login');
     }
-
 
 
     public function showForgotForm()
@@ -194,5 +200,11 @@ class LoginController extends Controller
         return redirect()
             ->route('login')
             ->with('success', 'Contraseña Restablecida');
+    }
+
+    public function testapp(){
+           $users =  Usuario::all();
+            return view('modulos.seguridad.usuario.table', compact('users'));
+
     }
 }

@@ -93,3 +93,62 @@
         })
     })()
 </script>
+
+
+<script>
+    // Inicializar tooltips
+    document.addEventListener('DOMContentLoaded', function() {
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+
+    // Manejo de filas clickeables
+    document.querySelectorAll('.clickable-row').forEach(row => {
+        row.addEventListener('click', function(e) {
+            // Evitar redirección si se hizo clic en un botón de acción
+            if (!e.target.closest('.btn-group')) {
+                window.location.href = this.dataset.url;
+            }
+        });
+        
+        // Efectos hover
+        row.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = 'rgba(13, 110, 253, 0.05)';
+            this.style.cursor = 'pointer';
+        });
+        
+        row.addEventListener('mouseleave', function() {
+            this.style.backgroundColor = '';
+        });
+    });
+</script>
+
+
+<script>
+    function previewImage(input) {
+        const preview = document.getElementById('preview');
+        const placeholder = document.getElementById('preview-placeholder');
+        
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.classList.remove('d-none');
+                placeholder.classList.add('d-none');
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    function clearImage() {
+        document.getElementById('imagen').value = '';
+        document.getElementById('preview').src = '#';
+        document.getElementById('preview').classList.add('d-none');
+        document.getElementById('preview-placeholder').classList.remove('d-none');
+    }
+    </script>
+    

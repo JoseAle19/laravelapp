@@ -10,22 +10,14 @@ class ResetCodeMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /** El código de recuperación */
-    public $code;
-
-    /**
-     * Crea una nueva instancia.
-     *
-     * @param  int|string  $code
-     */
+     public $code;
+ 
     public function __construct($code)
     {
         $this->code = $code;
     }
 
-    /**
-     * Construye el mensaje.
-     */
+   
     public function build()
     {
         return $this

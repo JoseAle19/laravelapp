@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Middleware\Acesso;
+use App\Http\Middleware\CheckSession;
+use App\Http\Middleware\GuestSession;
 use App\Http\Middleware\Permiso;
 use App\Http\Middleware\SqlInyection;
 use Illuminate\Foundation\Application;
@@ -17,10 +19,15 @@ return Application::configure(basePath: dirname(__DIR__))
        
 
         $middleware->alias([
+            'check.session' => CheckSession::class,
+            'guest.session' => GuestSession::class,
+
             'acceso' => Acesso::class,
             'SqlInyection' => SqlInyection::class,
             'permiso' => Permiso::class,
         ]);
+
+        
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

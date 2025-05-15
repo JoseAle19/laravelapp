@@ -62,7 +62,7 @@ $(document).ready(function () {
                             <use xlink:href="#exclamation-triangle-fill" />
                         </svg>
                         <div>
-                            Ha ocurrido un error inesperado: ${textStatus}
+                            Ha ocurrido un error inesperadow: ${textStatus}
                         </div>
                     </div>`;
 

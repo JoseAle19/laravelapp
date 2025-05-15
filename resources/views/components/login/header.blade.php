@@ -1,6 +1,13 @@
-<header class="d-flex justify-content-between align-items-center">
-    <div>
-        <h1 class="mb-2 fw-bold">{{ $title }}</h1>
-        {{ $subtitle }}
+<header class="">
+    <div class="d-flex justify-content-between align-items-center">
+        @if(session()->has('user_id'))
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="btn btn-outline-danger">
+                Cerrar sesións
+            </button>
+        </form>
+        @endif
     </div>
+    <hr>
 </header>

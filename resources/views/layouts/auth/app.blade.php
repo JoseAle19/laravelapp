@@ -2,8 +2,7 @@
 @extends('layouts.app')
  
 @push('styles')
-    {{-- Estilos específicos para este layout --}}
-    <style>
+     <style>
         .bg-image {
             background-size: cover;
             background-repeat: no-repeat;
@@ -12,8 +11,7 @@
 @endpush
 
 @push('javascript')
-    {{-- Scripts específicos para este layout --}}
-    <script src="{{ asset('modulos/js/seguridad/auth/login.js') }}"></script>
+     <script src="{{ asset('modulos/js/seguridad/auth/login.js') }}"></script>
 @endpush
  
 @section('slot')
